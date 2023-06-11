@@ -1,6 +1,6 @@
 # Civitates Hispaniae
 
-The present webmap shows the urban communities , or civitates, of Roman Spain and Portugal as published in the book [Urbanism in Roman Spain and Portugal](https://www.routledge.com/Urbanisation-in-Roman-Spain-and-Portugal-Civitates-Hispaniae-in-the-Early/Houten/p/book/9780367900779). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project "An Empire of 2000 Cities".
+The present [webmap](https://phahouten.github.io/CivitatesHispaniae/) shows the urban communities , or civitates, of Roman Spain and Portugal as published in the book [Urbanism in Roman Spain and Portugal](https://www.routledge.com/Urbanisation-in-Roman-Spain-and-Portugal-Civitates-Hispaniae-in-the-Early/Houten/p/book/9780367900779). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project "An Empire of 2000 Cities".
 ## Status
 The map shows the juridical status of the communities on the Iberian peninsula based on the available information using epigraphic and literary evidence. The main categories are:
 
