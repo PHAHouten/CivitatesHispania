@@ -1,5 +1,5 @@
 ol.proj.proj4.register(proj4);
-ol.proj.get("ESRI:102100").setExtent([-1248311.431575, 4246781.608931, 1009234.923612, 5520506.533374]);
+ol.proj.get("ESRI:102100").setExtent([-1107214.784376, 4205146.532709, 1043930.820464, 5478871.457152]);
 var wms_layers = [];
 
 
@@ -81,7 +81,7 @@ var lyr_Status_5 = new ol.layer.Vector({
                 declutter: true,
                 source:jsonSource_Status_5, 
                 style: style_Status_5,
-                interactive: true,
+                interactive: false,
     title: 'Status<br />\
     <img src="styles/legend/Status_5_0.png" /> Colonia<br />\
     <img src="styles/legend/Status_5_1.png" /> Municipium civium Romanorum<br />\
