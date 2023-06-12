@@ -9,11 +9,14 @@
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 1089px;
-            height: 783px;
+            width: 1557px;
+            height: 828px;
         }
         </style>
         <title>Civitates Hispaniae - Juridical status</title>
@@ -30,8 +33,12 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
+        <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
         <script src="js/leaflet-measure.js"></script>
         <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
         <script src="data/Roads_2.js"></script>
         <script src="data/Conventusboundaries_3.js"></script>
         <script src="data/Provincialboundaries_4.js"></script>
@@ -55,7 +62,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[35.3030900298556,-8.246809028700808],[44.08671568885678,7.678319508483548]]);
+        }).fitBounds([[35.167316174113,-10.541931965351862],[43.967195272447945,10.998518546671402]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -145,7 +152,7 @@
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
                     break;
                 case 'Secondary Road':
@@ -158,7 +165,7 @@
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
                     break;
             }
@@ -168,7 +175,7 @@
         map.getPane('pane_Roads_2').style['mix-blend-mode'] = 'normal';
         var layer_Roads_2 = new L.geoJson(json_Roads_2, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_Roads_2',
             layerName: 'layer_Roads_2',
             pane: 'pane_Roads_2',
@@ -211,7 +218,7 @@
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_Conventusboundaries_3');
@@ -219,7 +226,7 @@
         map.getPane('pane_Conventusboundaries_3').style['mix-blend-mode'] = 'normal';
         var layer_Conventusboundaries_3 = new L.geoJson(json_Conventusboundaries_3, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_Conventusboundaries_3',
             layerName: 'layer_Conventusboundaries_3',
             pane: 'pane_Conventusboundaries_3',
@@ -262,7 +269,7 @@
                 lineJoin: 'bevel',
                 weight: 1.0,
                 fillOpacity: 0,
-                interactive: false,
+                interactive: true,
             }
         }
         map.createPane('pane_Provincialboundaries_4');
@@ -270,7 +277,7 @@
         map.getPane('pane_Provincialboundaries_4').style['mix-blend-mode'] = 'normal';
         var layer_Provincialboundaries_4 = new L.geoJson(json_Provincialboundaries_4, {
             attribution: '',
-            interactive: false,
+            interactive: true,
             dataVar: 'json_Provincialboundaries_4',
             layerName: 'layer_Provincialboundaries_4',
             pane: 'pane_Provincialboundaries_4',
@@ -321,8 +328,7 @@
                 case 'Col':
                     return {
                 pane: 'pane_Status_5',
-                shape: 'diamond',
-                radius: 6.0,
+                radius: 5.2,
                 opacity: 1,
                 color: 'rgba(128,17,25,1.0)',
                 dashArray: '',
@@ -501,7 +507,7 @@
                 this._div.innerHTML = '<h2>Civitates Hispaniae - Juridical status</h2>';
             };
             title.addTo(map);
-            var abstract = new L.Control({'position':'bottomright'});
+            var abstract = new L.Control({'position':'bottomleft'});
             abstract.onAdd = function (map) {
                 this._div = L.DomUtil.create('div',
                 'leaflet-control abstract');
@@ -522,6 +528,16 @@
                     this._div.innerHTML = 'The web map shows the urban communities, or civitates, of Roman Spain and Portugal as published in the book "Urbanisation in Roman Spain and Portugal", Routledge: 2021(https://doi.org/10.4324/9781003022800). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project " An Empire of 2000 Cities" (E2kC).<br />The roads have been obtained via Pau de Soto and his Mercator-e project (http://fabricadesites.fcsh.unl.pt/mercator-e/pau-de-soto/). ';
             };
             abstract.addTo(map);
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
         var baseMaps = {};
         L.control.layers(baseMaps,{'Status<br /><table><tr><td style="text-align: center;"><img src="legend/Status_5_Colonia0.png" /></td><td>Colonia</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumciviumRomanorum1.png" /></td><td>Municipium civium Romanorum</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumciviumRomanorumuncertain2.png" /></td><td>Municipium civium Romanorum (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumLatinum3.png" /></td><td>Municipium Latinum</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumLatinumuncertain4.png" /></td><td>Municipium Latinum (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Municipium5.png" /></td><td>Municipium</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Municipiumuncertain6.png" /></td><td>Municipium (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Civitas7.png" /></td><td>Civitas</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Civitasuncertain8.png" /></td><td>Civitas (uncertain)</td></tr></table>': layer_Status_5,'<img src="legend/Provincialboundaries_4.png" /> Provincial boundaries': layer_Provincialboundaries_4,'<img src="legend/Conventusboundaries_3.png" /> Conventus boundaries': layer_Conventusboundaries_3,'Roads<br /><table><tr><td style="text-align: center;"><img src="legend/Roads_2_MainRoad0.png" /></td><td>Main Road</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_2_SecondaryRoad1.png" /></td><td>Secondary Road</td></tr></table>': layer_Roads_2,"Stamen Terrain Background": layer_StamenTerrainBackground_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
         map.on("zoomend", function(){
@@ -570,6 +586,166 @@
             propertyName: 'canon_name'}));
         document.getElementsByClassName('search-button')[0].className +=
          ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Status": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+        var i = 0;
+        layer_Status_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['canon_name'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['canon_name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Status_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Status = document.createElement('div');
+            div_Status.id = "div_Status";
+            div_Status.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Status);
+            sel_Status = document.createElement('select');
+            sel_Status.multiple = true;
+            sel_Status.size = 9;
+            sel_Status.id = "sel_Status";
+            var Status_options_str = "<option value='' unselected></option>";
+            sel_Status.onchange = function(){filterFunc()};
+            Status_options_str  += '<option value="Civ">Civ</option>';
+            Status_options_str  += '<option value="Civ?">Civ?</option>';
+            Status_options_str  += '<option value="Col">Col</option>';
+            Status_options_str  += '<option value="M">M</option>';
+            Status_options_str  += '<option value="M?">M?</option>';
+            Status_options_str  += '<option value="ML">ML</option>';
+            Status_options_str  += '<option value="ML?">ML?</option>';
+            Status_options_str  += '<option value="McR">McR</option>';
+            Status_options_str  += '<option value="McR?">McR?</option>';
+            sel_Status.innerHTML = Status_options_str;
+            div_Status.appendChild(sel_Status);
+            var lab_Status = document.createElement('div');
+            lab_Status.innerHTML = 'Status';
+            lab_Status.className = 'filterlabel';
+            div_Status.appendChild(lab_Status);
+            var reset_Status = document.createElement('div');
+            reset_Status.innerHTML = 'clear filter';
+            reset_Status.className = 'filterlabel';
+            reset_Status.onclick = function() {
+                var options = document.getElementById("sel_Status").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Status.appendChild(reset_Status);
         resetLabels([layer_Status_5]);
         map.on("zoomend", function(){
             resetLabels([layer_Status_5]);
