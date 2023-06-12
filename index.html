@@ -6,139 +6,580 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="./resources/ol.css">
-        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
-        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
-        <link rel="stylesheet" href="./resources/qgis2web.css">
-        <style>
-        .ol-geocoder.gcd-gl-container {
-            top: 100px!important;
-            left: .5em!important;
-            width: 2.1em!important;
-            height: 2.1em!important;
-        }
-        .ol-geocoder .gcd-gl-container{
-            width: 2.1em!important;
-            height: 2.1em!important;
-        }
-        .ol-geocoder .gcd-gl-control{
-            width: 2.1em!important;
-        }
-        .ol-geocoder .gcd-gl-expanded {
-            width: 15.625em!important;
-            height: 2.1875em;
-        }
-        .ol-touch .ol-geocoder.gcd-gl-container{
-            top: 130px!important;
-        }
-        .ol-geocoder .gcd-gl-btn {
-            width: 1.375em!important;
-            height: 1.375em!important;
-            top: .225em!important;
-            background-image: none!important;
-        }
-        </style>
-<style>
-.search-layer {
-  top: 135px;
-  left: .5em;
-}
-.ol-touch .search-layer {
-  top: 180px;
-}
-</style>
-        <style>
-        html, body {
-            background-color: #ffffff;
-        }
-        .ol-control button {
-            background-color: #f8f8f8 !important;
-            color: #000000 !important;
-            border-radius: 0px !important;
-        }
-        .ol-zoom, .geolocate, .gcd-gl-control .ol-control {
-            background-color: rgba(255,255,255,.4) !important;
-            padding: 3px !important;
-        }
-        .ol-scale-line {
-            background: none !important;
-        }
-        .ol-scale-line-inner {
-            border: 2px solid #f8f8f8 !important;
-            border-top: none !important;
-            background: rgba(255, 255, 255, 0.5) !important;
-            color: black !important;
-        }
-        </style>
-        <link href="resources/ol-geocoder.min.css" rel="stylesheet">
-<style>
-.tooltip {
-  position: relative;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  color: white;
-  padding: 4px 8px;
-  opacity: 0.7;
-  white-space: nowrap;
-}
-.tooltip-measure {
-  opacity: 1;
-  font-weight: bold;
-}
-.tooltip-static {
-  background-color: #ffcc33;
-  color: black;
-  border: 1px solid white;
-}
-.tooltip-measure:before,
-.tooltip-static:before {
-  border-top: 6px solid rgba(0, 0, 0, 0.5);
-  border-right: 6px solid transparent;
-  border-left: 6px solid transparent;
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  margin-left: -7px;
-  left: 50%;
-}
-.tooltip-static:before {
-  border-top-color: #ffcc33;
-}
-.measure-control {
-  top: 65px;
-  left: .5em;
-}
-.ol-touch .measure-control {
-  top: 80px;
-}
-</style>
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         #map {
-            width: 1397px;
-            height: 828px;
+            width: 1089px;
+            height: 783px;
         }
         </style>
-        <title></title>
+        <title>Civitates Hispaniae - Juridical status</title>
     </head>
     <body>
         <div id="map">
-            <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content"></div>
-            </div>
         </div>
-        <script src="resources/qgis2web_expressions.js"></script>
-<script src="resources/proj4.js"></script>
-        <script>proj4.defs('ESRI:102100','+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs');</script>
-        <script src="resources/polyfills.js"></script>
-        <script src="./resources/functions.js"></script>
-        <script src="./resources/ol.js"></script>
-        <script src="./resources/ol-layerswitcher.js"></script>
-        <script src="resources/ol-geocoder.js"></script>
-        <script src="layers/Roads_2.js"></script><script src="layers/Conventusboundaries_3.js"></script><script src="layers/Provincialboundaries_4.js"></script><script src="layers/Status_5.js"></script>
-        <script src="styles/Roads_2_style.js"></script><script src="styles/Conventusboundaries_3_style.js"></script><script src="styles/Provincialboundaries_4_style.js"></script><script src="styles/Status_5_style.js"></script>
-        <script src="./layers/layers.js" type="text/javascript"></script> 
-        <script src="./resources/Autolinker.min.js"></script>
-        <script src="./resources/qgis2web.js"></script>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/Roads_2.js"></script>
+        <script src="data/Conventusboundaries_3.js"></script>
+        <script src="data/Provincialboundaries_4.js"></script>
+        <script src="data/Status_5.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[35.3030900298556,-8.246809028700808],[44.08671568885678,7.678319508483548]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            map.setMaxBounds(map.getBounds());
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.createPane('pane_StamenTerrainBackground_1');
+        map.getPane('pane_StamenTerrainBackground_1').style.zIndex = 401;
+        var layer_StamenTerrainBackground_1 = L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}.png', {
+            pane: 'pane_StamenTerrainBackground_1',
+            opacity: 1.0,
+            attribution: '<a href="https://maps.stamen.com">Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_StamenTerrainBackground_1;
+        map.addLayer(layer_StamenTerrainBackground_1);
+        function pop_Roads_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LAYER'] !== null ? autolinker.link(feature.properties['LAYER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SOURCE'] !== null ? autolinker.link(feature.properties['SOURCE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timeperiod'] !== null ? autolinker.link(feature.properties['timeperiod'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Roads_2_0(feature) {
+            switch(String(feature.properties['LAYER'])) {
+                case 'Main Road':
+                    return {
+                pane: 'pane_Roads_2',
+                opacity: 1,
+                color: 'rgba(97,97,97,0.6)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+                    break;
+                case 'Secondary Road':
+                    return {
+                pane: 'pane_Roads_2',
+                opacity: 1,
+                color: 'rgba(97,97,97,0.6)',
+                dashArray: '1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Roads_2');
+        map.getPane('pane_Roads_2').style.zIndex = 402;
+        map.getPane('pane_Roads_2').style['mix-blend-mode'] = 'normal';
+        var layer_Roads_2 = new L.geoJson(json_Roads_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Roads_2',
+            layerName: 'layer_Roads_2',
+            pane: 'pane_Roads_2',
+            onEachFeature: pop_Roads_2,
+            style: style_Roads_2_0,
+        });
+        bounds_group.addLayer(layer_Roads_2);
+        map.addLayer(layer_Roads_2);
+        function pop_Conventusboundaries_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Conventusboundaries_3_0() {
+            return {
+                pane: 'pane_Conventusboundaries_3',
+                opacity: 1,
+                color: 'rgba(145,82,45,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Conventusboundaries_3');
+        map.getPane('pane_Conventusboundaries_3').style.zIndex = 403;
+        map.getPane('pane_Conventusboundaries_3').style['mix-blend-mode'] = 'normal';
+        var layer_Conventusboundaries_3 = new L.geoJson(json_Conventusboundaries_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Conventusboundaries_3',
+            layerName: 'layer_Conventusboundaries_3',
+            pane: 'pane_Conventusboundaries_3',
+            onEachFeature: pop_Conventusboundaries_3,
+            style: style_Conventusboundaries_3_0,
+        });
+        bounds_group.addLayer(layer_Conventusboundaries_3);
+        map.addLayer(layer_Conventusboundaries_3);
+        function pop_Provincialboundaries_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Provincialboundaries_4_0() {
+            return {
+                pane: 'pane_Provincialboundaries_4',
+                opacity: 1,
+                color: 'rgba(16,25,142,1.0)',
+                dashArray: '10,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Provincialboundaries_4');
+        map.getPane('pane_Provincialboundaries_4').style.zIndex = 404;
+        map.getPane('pane_Provincialboundaries_4').style['mix-blend-mode'] = 'normal';
+        var layer_Provincialboundaries_4 = new L.geoJson(json_Provincialboundaries_4, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Provincialboundaries_4',
+            layerName: 'layer_Provincialboundaries_4',
+            pane: 'pane_Provincialboundaries_4',
+            onEachFeature: pop_Provincialboundaries_4,
+            style: style_Provincialboundaries_4_0,
+        });
+        bounds_group.addLayer(layer_Provincialboundaries_4);
+        map.addLayer(layer_Provincialboundaries_4);
+        function pop_Status_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">E2KC ID</th>\
+                        <td>' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pleiades ID</th>\
+                        <td>' + (feature.properties['pleiades_i'] !== null ? autolinker.link(feature.properties['pleiades_i'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['canon_name'] !== null ? autolinker.link(feature.properties['canon_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Status</th>\
+                        <td>' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Status_5_0(feature) {
+            switch(String(feature.properties['Status'])) {
+                case 'Col':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'diamond',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,30,42,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'McR':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,30,42,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'McR?':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(128,17,25,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,133,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ML':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,123,182,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'ML?':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(50,87,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(165,207,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'M':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(84,176,74,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'M?':
+                    return {
+                pane: 'pane_Status_5',
+                shape: 'triangle',
+                radius: 2.8,
+                opacity: 1,
+                color: 'rgba(61,128,53,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,231,166,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Civ':
+                    return {
+                pane: 'pane_Status_5',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Civ?':
+                    return {
+                pane: 'pane_Status_5',
+                radius: 2.4,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(189,72,52,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Status_5');
+        map.getPane('pane_Status_5').style.zIndex = 405;
+        map.getPane('pane_Status_5').style['mix-blend-mode'] = 'normal';
+        var layer_Status_5 = new L.geoJson(json_Status_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Status_5',
+            layerName: 'layer_Status_5',
+            pane: 'pane_Status_5',
+            onEachFeature: pop_Status_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Status_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Status_5);
+        map.addLayer(layer_Status_5);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Civitates Hispaniae - Juridical status</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'bottomright'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+                    this._div.setAttribute("onmouseenter", "abstract.show()");
+                    this._div.setAttribute("onmouseleave", "abstract.hide()");
+                    this.hide();
+                    return this._div;
+                };
+                abstract.hide = function () {
+                    this._div.classList.remove("abstractUncollapsed");
+                    this._div.classList.add("abstract");
+                    this._div.innerHTML = 'i'
+                }
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'The web map shows the urban communities, or civitates, of Roman Spain and Portugal as published in the book "Urbanisation in Roman Spain and Portugal", Routledge: 2021(https://doi.org/10.4324/9781003022800). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project " An Empire of 2000 Cities" (E2kC).<br />The roads have been obtained via Pau de Soto and his Mercator-e project (http://fabricadesites.fcsh.unl.pt/mercator-e/pau-de-soto/). ';
+            };
+            abstract.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Status<br /><table><tr><td style="text-align: center;"><img src="legend/Status_5_Colonia0.png" /></td><td>Colonia</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumciviumRomanorum1.png" /></td><td>Municipium civium Romanorum</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumciviumRomanorumuncertain2.png" /></td><td>Municipium civium Romanorum (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumLatinum3.png" /></td><td>Municipium Latinum</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_MunicipiumLatinumuncertain4.png" /></td><td>Municipium Latinum (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Municipium5.png" /></td><td>Municipium</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Municipiumuncertain6.png" /></td><td>Municipium (uncertain)</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Civitas7.png" /></td><td>Civitas</td></tr><tr><td style="text-align: center;"><img src="legend/Status_5_Civitasuncertain8.png" /></td><td>Civitas (uncertain)</td></tr></table>': layer_Status_5,'<img src="legend/Provincialboundaries_4.png" /> Provincial boundaries': layer_Provincialboundaries_4,'<img src="legend/Conventusboundaries_3.png" /> Conventus boundaries': layer_Conventusboundaries_3,'Roads<br /><table><tr><td style="text-align: center;"><img src="legend/Roads_2_MainRoad0.png" /></td><td>Main Road</td></tr><tr><td style="text-align: center;"><img src="legend/Roads_2_SecondaryRoad1.png" /></td><td>Secondary Road</td></tr></table>': layer_Roads_2,"Stamen Terrain Background": layer_StamenTerrainBackground_1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        map.on("zoomend", function(){
+
+                if (map.hasLayer(layer_Status_5)) {
+                    if (map.getZoom() <= 7 && map.getZoom() >= 18) {
+                        layer_Status_5.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_Status_5.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        });
+        setBounds();
+        var i = 0;
+        layer_Status_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['canon_name'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Arial\', sans-serif;">' + layer.feature.properties['canon_name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Status_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+                if (map.hasLayer(layer_Status_5)) {
+                    if (map.getZoom() <= 7 && map.getZoom() >= 18) {
+                        layer_Status_5.eachLayer(function (layer) {
+                            layer.openTooltip();
+                        });
+                    } else {
+                        layer_Status_5.eachLayer(function (layer) {
+                            layer.closeTooltip();
+                        });
+                    }
+                }
+        map.addControl(new L.Control.Search({
+            layer: layer_Status_5,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'canon_name'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        resetLabels([layer_Status_5]);
+        map.on("zoomend", function(){
+            resetLabels([layer_Status_5]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_Status_5]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_Status_5]);
+        });
+        </script>
     </body>
 </html>
