@@ -1,6 +1,7 @@
 # Civitates Hispaniae
 
-The present [webmap](https://phahouten.github.io/CivitatesHispaniae/) shows the urban communities , or civitates, of Roman Spain and Portugal as published in the book [Urbanism in Roman Spain and Portugal](https://www.routledge.com/Urbanisation-in-Roman-Spain-and-Portugal-Civitates-Hispaniae-in-the-Early/Houten/p/book/9780367900779). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project "An Empire of 2000 Cities".
+The present [webmap](https://phahouten.github.io/CivitatesHispaniae/) shows the urban communities, or civitates, of Roman Spain and Portugal as published in the book [Urbanism in Roman Spain and Portugal](https://www.routledge.com/Urbanisation-in-Roman-Spain-and-Portugal-Civitates-Hispaniae-in-the-Early/Houten/p/book/9780367900779). This was the result of the doctoral work by Pieter Houten within the frame of the ERC-project "An Empire of 2000 Cities".
+
 ## Status
 The map shows the juridical status of the communities on the Iberian peninsula based on the available information using epigraphic and literary evidence. The main categories are:
 
@@ -24,3 +25,5 @@ the colonial status is granted without the deduction of coloni; these are honori
 * **civitas** these are self-governing communities for which we have no evidence of their status. They are considered self-goverining as they hold magistrates or refer to themselves as civitas or res publica. These include the civitates peregrinae (communities of foreigners). However, as we can see in the Naturalis Historia by Pliny (Book III and IV), these civitates could obtain different rights. Most were stipendiary (tribute paying); however, some were oppida libera (free towns) and as such exempted from taxes. The development and extent of these statuses and privileges is a debate in itself. 
 
 In addition to the certain categories we have to add the doubted categories. The uncertain Municipia civium Romanorum are the Oppida Latina as mentioned by Pliny in his Naturalis Historia, which I believe became Roman municipia in the Julio-Claudian period. The unceratin Latin municipia have the Quirina tribus attested, but do not mention municipium in the epigraphic record. As we cannot be sure that the inhabitants enlisted within the Quirina tribe belonged to the community, we must remain careful attributing the municpal status to these communities. The uncertain municipia are mentioned by Pliny with a status or they have an attested tribus. The uncertain civitates have indirect evidence for a self-governing status, either they have magistrates or refer to res publica. With these categories we can assign a status to all self-governing communities.
+
+If you spot any mistakes or can offer ways to imporve the map, please inform me via the Issues section of this page. Thank you!
