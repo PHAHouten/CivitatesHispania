@@ -6,9 +6,9 @@ The present [webmap](https://phahouten.github.io/CivitatesHispaniae/) shows the 
 The map shows the different statusses of the civitates of Hispania. The magnifying glass gives you the option to search modern place names. With the binoculars you can search for ancient place names.
 <br>
 When hovering over the places a pop-up will show the following:
-* **ID** the ID of each place used within E2kC
-* **Pleiades ID** the ID used within the Pleiades database (https://pleiades.stoa.org/). Note not all places are found in PLeiades. 
-* **Name** The ancient name is preferred
+* **ID** the ID of each place used within E2kC;
+* **Pleiades ID** the ID used within the Pleiades database (https://pleiades.stoa.org/). Note not all places are found in PLeiades; 
+* **Name** The ancient name is preferred;
 * **Status** this is a abbreviated form of the statusses found in the legend to the right. 
 
 ## Status
